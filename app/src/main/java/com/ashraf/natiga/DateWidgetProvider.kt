@@ -8,6 +8,8 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.os.Build
+import android.util.SizeF
 import android.view.View
 import android.widget.RemoteViews
 import java.util.Calendar
@@ -52,12 +54,31 @@ class DateWidgetProvider : AppWidgetProvider() {
         }
 
         private fun updateWidget(context: Context, manager: AppWidgetManager, id: Int) {
+            val d = DateCalc.today(context)
+            val opts = manager.getAppWidgetOptions(id)
+
+            // أندرويد ١٢+: الـ launcher بيدينا المقاسات الفعلية، فبنرسم نسخة لكل مقاس
+            // وهو بيختار اللي على قد الـ widget بالظبط
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                @Suppress("DEPRECATION")
+                val sizes = opts.getParcelableArrayList<SizeF>(AppWidgetManager.OPTION_APPWIDGET_SIZES)
+                    ?.filter { it.width > 0 && it.height > 0 }?.distinct()
+                if (!sizes.isNullOrEmpty()) {
+                    manager.updateAppWidget(id, RemoteViews(sizes.associateWith { build(context, d, it.width) }))
+                    return
+                }
+            }
+            // أقدم من كده: MAX_WIDTH أقرب لعرض الوضع الرأسي على أغلب الـ launchers
+            val w = maxOf(
+                opts.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, 0),
+                opts.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH, 0)
+            ).let { if (it > 0) it.toFloat() else 320f }
+            manager.updateAppWidget(id, build(context, d, w))
+        }
+
+        private fun build(context: Context, d: TriDate, widthDp: Float): RemoteViews {
             val v = RemoteViews(context.packageName, R.layout.widget_date)
-            // عرض الـ widget الفعلي (في الوضع الرأسي = MIN_WIDTH)
-            val w = manager.getAppWidgetOptions(id)
-                .getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, 0)
-                .let { if (it > 0) it.toFloat() else 320f }
-            WidgetFill.fill(context, DateCalc.today(context), w, object : ViewTarget {
+            WidgetFill.fill(context, d, widthDp, object : ViewTarget {
                 override fun image(id: Int, bmp: Bitmap, description: CharSequence) {
                     v.setImageViewBitmap(id, bmp)
                     v.setContentDescription(id, description)
@@ -73,7 +94,7 @@ class DateWidgetProvider : AppWidgetProvider() {
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
             v.setOnClickPendingIntent(R.id.root, open)
-            manager.updateAppWidget(id, v)
+            return v
         }
 
         // تحديث تلقائي بعد نص الليل بخمس ثواني

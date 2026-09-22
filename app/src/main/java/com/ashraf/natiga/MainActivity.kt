@@ -25,6 +25,15 @@ class MainActivity : Activity() {
             refresh()
         }
 
+        // accordion اللوحة: ضغطة تفتحها وضغطة تقفلها
+        val art = findViewById<ImageView>(R.id.art_image)
+        val arrow = findViewById<TextView>(R.id.art_arrow)
+        findViewById<View>(R.id.art_header).setOnClickListener {
+            val open = art.visibility != View.VISIBLE
+            art.visibility = if (open) View.VISIBLE else View.GONE
+            arrow.text = if (open) "▴" else "▾"
+        }
+
         val pin = findViewById<Button>(R.id.btn_pin)
         val manager = AppWidgetManager.getInstance(this)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && manager.isRequestPinAppWidgetSupported) {

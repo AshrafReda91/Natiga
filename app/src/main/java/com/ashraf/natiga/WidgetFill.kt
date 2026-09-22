@@ -14,8 +14,8 @@ interface ViewTarget {
 object WidgetFill {
     /** @param widthDp عرض الـ widget الفعلي — عشان النصوص الطويلة تتلف على قد العمود */
     fun fill(c: Context, d: TriDate, widthDp: Float, t: ViewTarget) {
-        // نفس الـ paddings والفواصل اللي في widget_date.xml
-        val stripW = widthDp - 32f
+        // عرض الأعمدة (نفس الـ paddings والفواصل اللي في widget_date.xml) — للنصوص اللي بتتلف.
+        // النصوص اللي سطر واحد بتترسم بعرضها الطبيعي، ولو أعرض من مكانها الـ ImageView بيصغّرها بدل ما تتقص
         val dateCol = (widthDp - 20f - 17f) / 2f
         val insightCol = (widthDp - 28f - 17f) / 2f
 
@@ -23,8 +23,8 @@ object WidgetFill {
             t.image(id, TextArt.render(c, text, font, sp, maxW, lines, tight), text)
 
         // الشريط العلوي
-        draw(R.id.day_name, d.dayName, Font.BOLD, 14f, stripW / 2f)
-        draw(R.id.season, d.season.name, Font.REGULAR, 12f, stripW / 2f)
+        draw(R.id.day_name, d.dayName, Font.BOLD, 14f, widthDp)
+        draw(R.id.season, d.season.name, Font.REGULAR, 12f, widthDp)
 
         // النص اليمين: القبطي — الرقم الكبير بـ Carlito لو الأرقام 123
         val num = if (d.latinDigits)
@@ -35,11 +35,11 @@ object WidgetFill {
         t.image(R.id.day_num_friday, num, d.copticDay)
         t.visible(R.id.day_num, !d.isFriday)
         t.visible(R.id.day_num_friday, d.isFriday)
-        draw(R.id.coptic, d.copticMonthYear, Font.BOLD, 15f, dateCol)
+        draw(R.id.coptic, d.copticMonthYear, Font.BOLD, 15f, widthDp)
 
         // النص الشمال: الميلادي والهجري + تمييز الأيام البيض
-        draw(R.id.gregorian, d.gregorian, Font.BOLD, 15f, dateCol - 8f)
-        draw(R.id.hijri, d.hijri, Font.REGULAR, 14f, dateCol - 8f)
+        draw(R.id.gregorian, d.gregorian, Font.BOLD, 15f, widthDp)
+        draw(R.id.hijri, d.hijri, Font.REGULAR, 14f, widthDp)
         if (d.whiteDay != null) draw(R.id.white_day, d.whiteDay, Font.BOLD, 12f, dateCol - 8f, lines = 2)
         t.visible(R.id.white_day, d.whiteDay != null)
         t.background(R.id.greg_hijri_box, if (d.whiteDay != null) R.drawable.moon_bg else 0)

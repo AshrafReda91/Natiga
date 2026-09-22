@@ -7,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/widget_bg"
+    android:padding="1.5dp"
     android:layoutDirection="rtl"
     android:orientation="vertical">
 
