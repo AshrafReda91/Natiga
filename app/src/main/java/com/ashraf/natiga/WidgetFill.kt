@@ -13,10 +13,17 @@ object WidgetFill {
         t.text(R.id.season, d.season.name)
 
         // النص اليمين: القبطي
-        t.text(R.id.day_num, d.copticDay)
-        t.text(R.id.day_num_friday, d.copticDay)
-        t.visible(R.id.day_num, !d.isFriday)
-        t.visible(R.id.day_num_friday, d.isFriday)
+        // الرقم الكبير: ٤ نسخ (Tajawal/Carlito × عادي/جمعة) — بيظهر واحد بس
+        val shown = when {
+            d.latinDigits && d.isFriday -> R.id.day_num_lat_friday
+            d.latinDigits -> R.id.day_num_lat
+            d.isFriday -> R.id.day_num_friday
+            else -> R.id.day_num
+        }
+        for (id in intArrayOf(R.id.day_num, R.id.day_num_friday, R.id.day_num_lat, R.id.day_num_lat_friday)) {
+            t.text(id, d.copticDay)
+            t.visible(id, id == shown)
+        }
         t.text(R.id.coptic, d.copticMonthYear)
 
         // النص الشمال: الميلادي والهجري + تمييز الأيام البيض

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="AppTheme" parent="@android:style/Theme.Material.NoActionBar">
-        <item name="android:colorAccent">#FF7A6E</item>
+        <item name="android:colorAccent">@color/accent</item>
+        <item name="android:fontFamily">@font/tajawal_regular</item>
+        <item name="android:windowBackground">@color/screen_bg</item>
         <item name="android:statusBarColor">@color/screen_bg</item>
         <item name="android:windowLightStatusBar">false</item>
     </style>

@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- هوية مستوحاة من لوحة «السنة القبطية»: ورق البردي، أخضر أعمدة اللوتس، الذهبي، والأحمر الطوبي -->
 <resources>
-    <color name="paper">#F7F6F2</color>
-    <color name="strip">#A31D1D</color>
-    <color name="strip_text">#FFF8F0</color>
-    <color name="ink">#1B1B1B</color>
-    <color name="ink_soft">#55524C</color>
-    <color name="friday">#B3261E</color>
-    <color name="screen_bg">#ECEBE6</color>
-    <color name="divider">#D9D5CC</color>
-    <color name="proverb">#A31D1D</color>
-    <color name="moon_bg">#F6EBCB</color>
-    <color name="moon_text">#8A6212</color>
+    <color name="paper">#F4E8CE</color>        <!-- بردي -->
+    <color name="frame">#C9A24A</color>        <!-- إطار ذهبي -->
+    <color name="strip">#1E5A57</color>        <!-- أخضر اللوتس -->
+    <color name="strip_text">#F6ECD4</color>
+    <color name="ink">#3A2A1A</color>          <!-- بني الحبر -->
+    <color name="ink_soft">#6E5A3E</color>
+    <color name="friday">#A4301F</color>
+    <color name="proverb">#A4301F</color>      <!-- أحمر الأمثال -->
+    <color name="screen_bg">#EADBB8</color>
+    <color name="divider">#D6BC80</color>
+    <color name="moon_bg">#F0D995</color>      <!-- ذهب البدر -->
+    <color name="moon_text">#6E4A0C</color>
+    <color name="accent">#1E5A57</color>
 </resources>

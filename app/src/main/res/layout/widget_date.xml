@@ -29,10 +29,11 @@
             android:text="الثلاثاء"
             android:textColor="@color/strip_text"
             android:textSize="14sp"
-            android:textStyle="bold" />
+            android:fontFamily="@font/tajawal_bold" />
 
         <TextView
             android:id="@+id/season"
+            android:fontFamily="@font/tajawal_regular"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -67,23 +68,44 @@
                 android:id="@+id/day_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="serif"
                 android:includeFontPadding="false"
                 android:text="١٢"
                 android:textColor="@color/ink"
                 android:textSize="44sp"
-                android:textStyle="bold" />
+                android:fontFamily="@font/tajawal_bold" />
 
             <TextView
                 android:id="@+id/day_num_friday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="serif"
                 android:includeFontPadding="false"
                 android:text="١٢"
                 android:textColor="@color/friday"
                 android:textSize="44sp"
-                android:textStyle="bold"
+                android:fontFamily="@font/tajawal_bold"
+                android:visibility="gone" />
+
+            <!-- نفس الرقم بخط Carlito لما الأرقام تبقى 123 -->
+            <TextView
+                android:id="@+id/day_num_lat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:text="12"
+                android:textColor="@color/ink"
+                android:textSize="48sp"
+                android:fontFamily="@font/carlito_bold"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/day_num_lat_friday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:text="12"
+                android:textColor="@color/friday"
+                android:textSize="48sp"
+                android:fontFamily="@font/carlito_bold"
                 android:visibility="gone" />
 
             <TextView
@@ -95,7 +117,7 @@
                 android:text="توت ١٧٤٣ ش"
                 android:textColor="@color/ink"
                 android:textSize="15sp"
-                android:textStyle="bold" />
+                android:fontFamily="@font/tajawal_bold" />
         </LinearLayout>
 
         <!-- فاصل رأسي -->
@@ -124,10 +146,11 @@
                 android:text="٢٢ سبتمبر ٢٠٢٦"
                 android:textColor="@color/ink"
                 android:textSize="15sp"
-                android:textStyle="bold" />
+                android:fontFamily="@font/tajawal_bold" />
 
             <TextView
                 android:id="@+id/hijri"
+                android:fontFamily="@font/tajawal_regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -145,7 +168,7 @@
                 android:text="🌕 ليلة البدر — اكتمال القمر"
                 android:textColor="@color/moon_text"
                 android:textSize="12sp"
-                android:textStyle="bold"
+                android:fontFamily="@font/tajawal_bold"
                 android:visibility="gone" />
         </LinearLayout>
     </LinearLayout>
@@ -181,7 +204,7 @@
             android:text="«توت يقول للحر موت»"
             android:textColor="@color/proverb"
             android:textSize="13sp"
-            android:textStyle="bold" />
+            android:fontFamily="@font/tajawal_bold" />
 
         <TextView
             android:id="@+id/theme"
@@ -193,10 +216,11 @@
             android:text="التجدد والبداية"
             android:textColor="@color/ink"
             android:textSize="14sp"
-            android:textStyle="bold" />
+            android:fontFamily="@font/tajawal_bold" />
 
         <TextView
             android:id="@+id/advice"
+            android:fontFamily="@font/tajawal_regular"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"

@@ -10,6 +10,7 @@ import android.icu.util.IslamicCalendar
 data class TriDate(
     val dayName: String,
     val isFriday: Boolean,
+    val latinDigits: Boolean,     // الأرقام 123 (خط Carlito) بدل ١٢٣ (خط Tajawal)
     val copticDay: String,        // رقم اليوم القبطي (الرقم الكبير — النص اليمين)
     val copticMonthYear: String,  // الشهر والسنة القبطية
     val gregorian: String,        // التاريخ الميلادي كامل (النص الشمال)
@@ -64,6 +65,7 @@ object DateCalc {
         return TriDate(
             dayName = DAYS[dow - 1],
             isFriday = dow == Calendar.FRIDAY,
+            latinDigits = !ar,
             copticDay = num(c.get(Calendar.DAY_OF_MONTH), ar),
             copticMonthYear = "${COPTIC[cMonth]} ${num(c.get(Calendar.YEAR), ar)} ش",
             gregorian = "${num(g.get(Calendar.DAY_OF_MONTH), ar)} ${GREG[g.get(Calendar.MONTH)]} ${num(g.get(Calendar.YEAR), ar)}",

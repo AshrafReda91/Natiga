@@ -2,7 +2,12 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp" android:height="108dp"
     android:viewportWidth="108" android:viewportHeight="108">
-    <path android:fillColor="#F7F6F2" android:pathData="M18,22h72a8,8 0,0 1,8 8v58a8,8 0,0 1,-8 8H18a8,8 0,0 1,-8 -8V30a8,8 0,0 1,8 -8z"/>
-    <path android:fillColor="#A31D1D" android:pathData="M18,22h72a8,8 0,0 1,8 8v12H10V30a8,8 0,0 1,8 -8z"/>
-    <path android:fillColor="#1B1B1B" android:pathData="M34,56h40v6H34zM34,70h28v6H34z"/>
+    <!-- ورقة بردي بإطار ذهبي -->
+    <path android:fillColor="#C9A24A" android:pathData="M17,20h74a9,9 0,0 1,9 9v60a9,9 0,0 1,-9 9H17a9,9 0,0 1,-9 -9V29a9,9 0,0 1,9 -9z"/>
+    <path android:fillColor="#F4E8CE" android:pathData="M18,22h72a8,8 0,0 1,8 8v58a8,8 0,0 1,-8 8H18a8,8 0,0 1,-8 -8V30a8,8 0,0 1,8 -8z"/>
+    <!-- شريط أخضر اللوتس -->
+    <path android:fillColor="#1E5A57" android:pathData="M18,22h72a8,8 0,0 1,8 8v12H10V30a8,8 0,0 1,8 -8z"/>
+    <!-- قرص الشمس الذهبي -->
+    <path android:fillColor="#C9A24A" android:pathData="M54,69m-11,0a11,11 0,1 1,22 0a11,11 0,1 1,-22 0"/>
+    <path android:fillColor="#3A2A1A" android:pathData="M30,84h48v4H30z"/>
 </vector>
