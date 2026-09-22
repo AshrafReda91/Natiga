@@ -8,12 +8,15 @@ import android.icu.util.GregorianCalendar
 import android.icu.util.IslamicCalendar
 
 data class TriDate(
-    val dayNum: String,     // رقم اليوم الميلادي (الرقم الكبير)
-    val monthYear: String,  // الشهر والسنة الميلادي (الشريط العلوي)
     val dayName: String,
-    val hijri: String,
-    val coptic: String,
-    val isFriday: Boolean
+    val isFriday: Boolean,
+    val copticDay: String,        // رقم اليوم القبطي (الرقم الكبير — النص اليمين)
+    val copticMonthYear: String,  // الشهر والسنة القبطية
+    val gregorian: String,        // التاريخ الميلادي كامل (النص الشمال)
+    val hijri: String,            // التاريخ الهجري كامل (النص الشمال)
+    val whiteDay: String?,        // الأيام البيض (١٣ و١٤ و١٥ هجري) — null في باقي الأيام
+    val season: Season,
+    val insight: Insight
 )
 
 object Prefs {
@@ -52,17 +55,27 @@ object DateCalc {
         h.timeInMillis = now
         val offset = Prefs.hijriOffset(context)
         if (offset != 0) h.add(Calendar.DATE, offset)
+        val hDay = h.get(Calendar.DAY_OF_MONTH)
 
         val c = CopticCalendar()
         c.timeInMillis = now
+        val cMonth = c.get(Calendar.MONTH)
 
         return TriDate(
-            dayNum = num(g.get(Calendar.DAY_OF_MONTH), ar),
-            monthYear = "${GREG[g.get(Calendar.MONTH)]} ${num(g.get(Calendar.YEAR), ar)}",
             dayName = DAYS[dow - 1],
-            hijri = "${num(h.get(Calendar.DAY_OF_MONTH), ar)} ${HIJRI[h.get(Calendar.MONTH)]} ${num(h.get(Calendar.YEAR), ar)} هـ",
-            coptic = "${num(c.get(Calendar.DAY_OF_MONTH), ar)} ${COPTIC[c.get(Calendar.MONTH)]} ${num(c.get(Calendar.YEAR), ar)} ش",
-            isFriday = dow == Calendar.FRIDAY
+            isFriday = dow == Calendar.FRIDAY,
+            copticDay = num(c.get(Calendar.DAY_OF_MONTH), ar),
+            copticMonthYear = "${COPTIC[cMonth]} ${num(c.get(Calendar.YEAR), ar)} ش",
+            gregorian = "${num(g.get(Calendar.DAY_OF_MONTH), ar)} ${GREG[g.get(Calendar.MONTH)]} ${num(g.get(Calendar.YEAR), ar)}",
+            hijri = "${num(hDay, ar)} ${HIJRI[h.get(Calendar.MONTH)]} ${num(h.get(Calendar.YEAR), ar)} هـ",
+            whiteDay = when (hDay) {
+                13 -> "🌔 أول الأيام البيض"
+                14 -> "🌕 ليلة البدر — اكتمال القمر"
+                15 -> "🌖 آخر الأيام البيض"
+                else -> null
+            },
+            season = Insights.seasonFor(cMonth),
+            insight = Insights.forCopticMonth(cMonth)
         )
     }
 

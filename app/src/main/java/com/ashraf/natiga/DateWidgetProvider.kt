@@ -44,16 +44,14 @@ class DateWidgetProvider : AppWidgetProvider() {
         }
 
         private fun updateWidget(context: Context, manager: AppWidgetManager, id: Int) {
-            val d = DateCalc.today(context)
             val v = RemoteViews(context.packageName, R.layout.widget_date)
-            v.setTextViewText(R.id.month_year, d.monthYear)
-            v.setTextViewText(R.id.day_num, d.dayNum)
-            v.setTextViewText(R.id.day_num_friday, d.dayNum)
-            v.setViewVisibility(R.id.day_num, if (d.isFriday) View.GONE else View.VISIBLE)
-            v.setViewVisibility(R.id.day_num_friday, if (d.isFriday) View.VISIBLE else View.GONE)
-            v.setTextViewText(R.id.day_name, d.dayName)
-            v.setTextViewText(R.id.hijri, d.hijri)
-            v.setTextViewText(R.id.coptic, d.coptic)
+            WidgetFill.fill(DateCalc.today(context), object : ViewTarget {
+                override fun text(id: Int, s: CharSequence) = v.setTextViewText(id, s)
+                override fun visible(id: Int, show: Boolean) =
+                    v.setViewVisibility(id, if (show) View.VISIBLE else View.GONE)
+                override fun background(id: Int, res: Int) =
+                    v.setInt(id, "setBackgroundResource", res)
+            })
 
             val open = PendingIntent.getActivity(
                 context, 0, Intent(context, MainActivity::class.java),

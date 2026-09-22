@@ -48,18 +48,20 @@ class MainActivity : Activity() {
     }
 
     private fun refresh() {
-        val d = DateCalc.today(this)
         val ar = Prefs.arabicDigits(this)
 
         // المعاينة = نفس layout الـ widget
-        findViewById<TextView>(R.id.month_year).text = d.monthYear
-        findViewById<TextView>(R.id.day_num).text = d.dayNum
-        findViewById<TextView>(R.id.day_num_friday).text = d.dayNum
-        findViewById<TextView>(R.id.day_num).visibility = if (d.isFriday) View.GONE else View.VISIBLE
-        findViewById<TextView>(R.id.day_num_friday).visibility = if (d.isFriday) View.VISIBLE else View.GONE
-        findViewById<TextView>(R.id.day_name).text = d.dayName
-        findViewById<TextView>(R.id.hijri).text = d.hijri
-        findViewById<TextView>(R.id.coptic).text = d.coptic
+        WidgetFill.fill(DateCalc.today(this), object : ViewTarget {
+            override fun text(id: Int, s: CharSequence) {
+                findViewById<TextView>(id).text = s
+            }
+            override fun visible(id: Int, show: Boolean) {
+                findViewById<View>(id).visibility = if (show) View.VISIBLE else View.GONE
+            }
+            override fun background(id: Int, res: Int) {
+                findViewById<View>(id).setBackgroundResource(res)
+            }
+        })
 
         val off = Prefs.hijriOffset(this)
         val sign = if (off > 0) "+" else if (off < 0) "−" else ""

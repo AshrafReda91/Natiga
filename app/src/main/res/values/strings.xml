@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">النتيجة</string>
-    <string name="widget_description">التاريخ الميلادي والهجري والقبطي</string>
+    <string name="widget_description">التاريخ القبطي والميلادي والهجري مع تأمل الشهر</string>
 </resources>

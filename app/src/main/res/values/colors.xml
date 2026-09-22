@@ -7,4 +7,8 @@
     <color name="ink_soft">#55524C</color>
     <color name="friday">#B3261E</color>
     <color name="screen_bg">#ECEBE6</color>
+    <color name="divider">#D9D5CC</color>
+    <color name="proverb">#A31D1D</color>
+    <color name="moon_bg">#F6EBCB</color>
+    <color name="moon_text">#8A6212</color>
 </resources>

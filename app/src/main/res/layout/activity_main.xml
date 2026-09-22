@@ -24,7 +24,7 @@
         <include
             layout="@layout/widget_date"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="240dp"
             android:layout_marginTop="16dp" />
 
         <Button
@@ -98,5 +98,14 @@
             android:text="أو ضيفه يدويًا: اضغط مطوّل على الشاشة الرئيسية ← Widgets ← النتيجة"
             android:textColor="@color/ink_soft"
             android:textSize="13sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="start"
+            android:text="تأملات الشهور القبطية من لوحة «السنة القبطية — دورة الحياة في انسجام مع الطبيعة» — لقاء الروح، محمد فاروق المليجي."
+            android:textColor="@color/ink_soft"
+            android:textSize="12sp" />
     </LinearLayout>
 </ScrollView>
