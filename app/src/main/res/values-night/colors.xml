@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="paper">#232220</color>
+    <color name="strip">#7E1A1A</color>
+    <color name="strip_text">#F4E9E2</color>
+    <color name="ink">#F1EFEA</color>
+    <color name="ink_soft">#B3AEA6</color>
+    <color name="friday">#FF7A6E</color>
+    <color name="screen_bg">#161514</color>
+</resources>
