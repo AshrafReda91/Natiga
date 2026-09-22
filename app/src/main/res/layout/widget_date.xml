@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- مستوحى من نتيجة الحيطة المصرية:
-     النص اليمين = القبطي، النص الشمال = الميلادي والهجري، وتحتهم تأمل الشهر القبطي -->
+     النص اليمين = القبطي، النص الشمال = الميلادي والهجري، وتحتهم تأمل الشهر القبطي.
+     كل النصوص صور بيرسمها TextArt بخط Tajawal/Carlito، ولونها من android:tint -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/root"
     android:layout_width="match_parent"
@@ -18,30 +19,24 @@
         android:layoutDirection="rtl"
         android:orientation="horizontal"
         android:paddingStart="16dp"
-        android:paddingTop="6dp"
+        android:paddingTop="7dp"
         android:paddingEnd="16dp"
-        android:paddingBottom="6dp">
+        android:paddingBottom="7dp">
 
-        <TextView
+        <ImageView
             android:id="@+id/day_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="الثلاثاء"
-            android:textColor="@color/strip_text"
-            android:textSize="14sp"
-            android:fontFamily="@font/tajawal_bold" />
+            style="@style/WidgetText"
+            android:tint="@color/strip_text" />
 
-        <TextView
-            android:id="@+id/season"
-            android:fontFamily="@font/tajawal_regular"
+        <FrameLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:maxLines="1"
-            android:text="أخيت · الفيضان"
-            android:textColor="@color/strip_text"
-            android:textSize="12sp" />
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/season"
+            style="@style/WidgetText"
+            android:tint="@color/strip_text" />
     </LinearLayout>
 
     <!-- التواريخ: يمين قبطي | شمال ميلادي وهجري -->
@@ -64,66 +59,28 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <TextView
+            <ImageView
                 android:id="@+id/day_num"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:includeFontPadding="false"
-                android:text="١٢"
-                android:textColor="@color/ink"
-                android:textSize="44sp"
-                android:fontFamily="@font/tajawal_bold" />
+                style="@style/WidgetText"
+                android:tint="@color/ink" />
 
-            <TextView
+            <ImageView
                 android:id="@+id/day_num_friday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:includeFontPadding="false"
-                android:text="١٢"
-                android:textColor="@color/friday"
-                android:textSize="44sp"
-                android:fontFamily="@font/tajawal_bold"
+                style="@style/WidgetText"
+                android:tint="@color/friday"
                 android:visibility="gone" />
 
-            <!-- نفس الرقم بخط Carlito لما الأرقام تبقى 123 -->
-            <TextView
-                android:id="@+id/day_num_lat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:includeFontPadding="false"
-                android:text="12"
-                android:textColor="@color/ink"
-                android:textSize="48sp"
-                android:fontFamily="@font/carlito_bold"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/day_num_lat_friday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:includeFontPadding="false"
-                android:text="12"
-                android:textColor="@color/friday"
-                android:textSize="48sp"
-                android:fontFamily="@font/carlito_bold"
-                android:visibility="gone" />
-
-            <TextView
+            <ImageView
                 android:id="@+id/coptic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:maxLines="1"
-                android:text="توت ١٧٤٣ ش"
-                android:textColor="@color/ink"
-                android:textSize="15sp"
-                android:fontFamily="@font/tajawal_bold" />
+                style="@style/WidgetText"
+                android:layout_marginTop="4dp"
+                android:tint="@color/ink" />
         </LinearLayout>
 
         <!-- فاصل رأسي -->
         <FrameLayout
             android:layout_width="1dp"
-            android:layout_height="64dp"
+            android:layout_height="60dp"
             android:background="@color/divider" />
 
         <!-- النص الشمال: الميلادي والهجري (خلفية ذهبي في الأيام البيض) -->
@@ -135,40 +92,27 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
+            android:paddingStart="4dp"
             android:paddingTop="4dp"
+            android:paddingEnd="4dp"
             android:paddingBottom="4dp">
 
-            <TextView
+            <ImageView
                 android:id="@+id/gregorian"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:text="٢٢ سبتمبر ٢٠٢٦"
-                android:textColor="@color/ink"
-                android:textSize="15sp"
-                android:fontFamily="@font/tajawal_bold" />
+                style="@style/WidgetText"
+                android:tint="@color/ink" />
 
-            <TextView
+            <ImageView
                 android:id="@+id/hijri"
-                android:fontFamily="@font/tajawal_regular"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/WidgetText"
                 android:layout_marginTop="4dp"
-                android:maxLines="1"
-                android:text="١٠ ربيع الآخر ١٤٤٨ هـ"
-                android:textColor="@color/ink_soft"
-                android:textSize="14sp" />
+                android:tint="@color/ink_soft" />
 
-            <TextView
+            <ImageView
                 android:id="@+id/white_day"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/WidgetText"
                 android:layout_marginTop="3dp"
-                android:maxLines="1"
-                android:text="🌕 ليلة البدر — اكتمال القمر"
-                android:textColor="@color/moon_text"
-                android:textSize="12sp"
-                android:fontFamily="@font/tajawal_bold"
+                android:tint="@color/moon_text"
                 android:visibility="gone" />
         </LinearLayout>
     </LinearLayout>
@@ -181,54 +125,56 @@
         android:layout_marginEnd="16dp"
         android:background="@color/divider" />
 
-    <!-- تأمل الشهر القبطي -->
+    <!-- تأمل الشهر: يمين المثل والمعنى | شمال التوجيه -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center_vertical"
         android:layoutDirection="rtl"
-        android:orientation="vertical"
-        android:paddingStart="16dp"
+        android:orientation="horizontal"
+        android:paddingStart="14dp"
         android:paddingTop="6dp"
-        android:paddingEnd="16dp"
-        android:paddingBottom="10dp">
+        android:paddingEnd="14dp"
+        android:paddingBottom="8dp">
 
-        <TextView
-            android:id="@+id/proverb"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:gravity="start"
-            android:maxLines="1"
-            android:text="«توت يقول للحر موت»"
-            android:textColor="@color/proverb"
-            android:textSize="13sp"
-            android:fontFamily="@font/tajawal_bold" />
+            android:layout_weight="1"
+            android:gravity="start|center_vertical"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/theme"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
-            android:gravity="start"
-            android:maxLines="1"
-            android:text="التجدد والبداية"
-            android:textColor="@color/ink"
-            android:textSize="14sp"
-            android:fontFamily="@font/tajawal_bold" />
+            <ImageView
+                android:id="@+id/proverb"
+                style="@style/WidgetText"
+                android:tint="@color/proverb" />
 
-        <TextView
-            android:id="@+id/advice"
-            android:fontFamily="@font/tajawal_regular"
-            android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/theme"
+                style="@style/WidgetText"
+                android:layout_marginTop="3dp"
+                android:tint="@color/ink" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/divider" />
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:ellipsize="end"
-            android:gravity="start"
-            android:maxLines="3"
-            android:text="اترك القديم ينتهي. نظّف مساحتك، وجدّد نيتك للدورة الجديدة."
-            android:textColor="@color/ink_soft"
-            android:textSize="12.5sp" />
+            android:layout_weight="1"
+            android:gravity="start|center_vertical"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/advice"
+                style="@style/WidgetText"
+                android:tint="@color/ink_soft" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

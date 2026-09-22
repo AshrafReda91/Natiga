@@ -7,6 +7,7 @@ import android.appwidget.AppWidgetProvider
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.view.View
 import android.widget.RemoteViews
 import java.util.Calendar
@@ -28,6 +29,13 @@ class DateWidgetProvider : AppWidgetProvider() {
         }
     }
 
+    // لما الـ widget يكبر أو يصغر: نعيد رسم النصوص على العرض الجديد
+    override fun onAppWidgetOptionsChanged(
+        context: Context, manager: AppWidgetManager, id: Int, newOptions: android.os.Bundle
+    ) {
+        updateWidget(context, manager, id)
+    }
+
     override fun onDisabled(context: Context) {
         val am = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         am.cancel(midnightIntent(context))
@@ -45,8 +53,15 @@ class DateWidgetProvider : AppWidgetProvider() {
 
         private fun updateWidget(context: Context, manager: AppWidgetManager, id: Int) {
             val v = RemoteViews(context.packageName, R.layout.widget_date)
-            WidgetFill.fill(DateCalc.today(context), object : ViewTarget {
-                override fun text(id: Int, s: CharSequence) = v.setTextViewText(id, s)
+            // عرض الـ widget الفعلي (في الوضع الرأسي = MIN_WIDTH)
+            val w = manager.getAppWidgetOptions(id)
+                .getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, 0)
+                .let { if (it > 0) it.toFloat() else 320f }
+            WidgetFill.fill(context, DateCalc.today(context), w, object : ViewTarget {
+                override fun image(id: Int, bmp: Bitmap, description: CharSequence) {
+                    v.setImageViewBitmap(id, bmp)
+                    v.setContentDescription(id, description)
+                }
                 override fun visible(id: Int, show: Boolean) =
                     v.setViewVisibility(id, if (show) View.VISIBLE else View.GONE)
                 override fun background(id: Int, res: Int) =

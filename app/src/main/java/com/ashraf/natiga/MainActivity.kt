@@ -3,10 +3,12 @@ package com.ashraf.natiga
 import android.app.Activity
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
+import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 
 class MainActivity : Activity() {
@@ -51,9 +53,14 @@ class MainActivity : Activity() {
         val ar = Prefs.arabicDigits(this)
 
         // المعاينة = نفس layout الـ widget
-        WidgetFill.fill(DateCalc.today(this), object : ViewTarget {
-            override fun text(id: Int, s: CharSequence) {
-                findViewById<TextView>(id).text = s
+        val dm = resources.displayMetrics
+        val previewW = dm.widthPixels / dm.density - 40f // padding الشاشة ٢٠dp من كل ناحية
+        WidgetFill.fill(this, DateCalc.today(this), previewW, object : ViewTarget {
+            override fun image(id: Int, bmp: Bitmap, description: CharSequence) {
+                findViewById<ImageView>(id).apply {
+                    setImageBitmap(bmp)
+                    contentDescription = description
+                }
             }
             override fun visible(id: Int, show: Boolean) {
                 findViewById<View>(id).visibility = if (show) View.VISIBLE else View.GONE
